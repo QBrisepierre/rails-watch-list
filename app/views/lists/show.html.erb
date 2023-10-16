@@ -1,0 +1,43 @@
+<div class="position-relative">
+  <img class="w-100 object-fit-cover" style="height: 400px" src="https://static.hitek.fr/img/actualite/2015/08/02/fb_super-heoros.jpg" alt="">
+  <h3><span class="position-absolute top-0 end-0 rounded translate-middle badge bg-warning mt-5 negative-margin">2 movies</span></h3>
+</div>
+<div class="container mt-3">
+  
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to "Add a movie", new_list_bookmark_path, class: "w-25 btn btn-success text-white" %>
+  </div>
+
+  <div class="row">
+
+    <div class="col">
+      <div class="card mb-3">
+        <img src="https://static.hitek.fr/img/actualite/2015/08/02/fb_super-heoros.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <div class="d-flex justify-content-between">
+            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            <%= link_to "delete", list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card mb-3">
+        <img src="https://static.hitek.fr/img/actualite/2015/08/02/fb_super-heoros.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <div class="d-flex justify-content-between">
+            <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            <%= link_to "delete", list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+</div>

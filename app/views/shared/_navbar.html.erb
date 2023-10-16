@@ -1,9 +1,9 @@
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand">Navbar</a>
+    <%= link_to "MyApp", lists_path, class: "btn btn-primary" %>
     <div>
       <button type="button" class="btn btn-primary">My list</button>
-      <button type="button" class="btn btn-primary">New list</button>
+      <%= link_to "New list", new_list_path, class: "btn btn-primary" %>
     </div>
   </div>
 </nav>
