@@ -19,7 +19,7 @@
             <p class="card-text"><%= bookmark.comment %></p>
             <div class="d-flex justify-content-between">
               <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              <%= link_to "delete", list_path(@list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <%= link_to "delete", list_bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
             </div>
           </div>
         </div>

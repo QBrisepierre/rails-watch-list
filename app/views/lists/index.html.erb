@@ -4,9 +4,9 @@
     <%= link_to "Create a movie list", new_list_path, class: "btn btn-success text-white" %>
   </div>
 
-  <div class="row justify-content-between">
+  <div class="row row-cols-3">
     <% @lists.each do |list| %>
-      <div class="col-4 my-3">
+      <div class="col my-3">
         <div class="card">
           <%= link_to list_path(list) do %>
             <img src="https://picsum.photos/800/500" class="card-img-top w-100" alt="...">
