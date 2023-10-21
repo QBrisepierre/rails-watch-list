@@ -7,6 +7,8 @@ class ListsController < ApplicationController
 
   def show
     @bookmarks = @list.bookmarks
+    @reviews = @list.reviews
+    @review = Review.new
   end
 
   def new
@@ -25,7 +27,7 @@ class ListsController < ApplicationController
   private
 
   def set_params
-    @list = List.find(params[:id])
+    params[:review] ? @list = List.find(params[:list_id]) : @list = List.find(params[:id])
   end
 
   def list_params

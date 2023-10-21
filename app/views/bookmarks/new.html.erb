@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <h1>New bookmark</h1>
-  <%= simple_form_for(@bookmark, url: list_bookmarks_path) do |f| %>
+  <%= simple_form_for [@list, @bookmark] do |f| %>
     <%= f.input :movie_id, collection: @collection %>
     <%= f.input :comment %>
     <%= f.submit "Create list", class: "btn btn-primary" %>

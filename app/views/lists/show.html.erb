@@ -19,13 +19,30 @@
             <p class="card-text"><%= bookmark.comment %></p>
             <div class="d-flex justify-content-between">
               <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-              <%= link_to "delete", list_bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+              <%= link_to "delete", list_bookmark_path(@list, bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
             </div>
           </div>
         </div>
       </div>
     <% end %>
+  </div>
 
+  <div class="row mt-4 mb-5">
+    <div class="col">
+      <h2><%= @reviews.count %> Reviews</h2>
+      <% @reviews.each do |review| %>
+        <p><%= review.rating %></p>
+        <p><%= review.comment %></p>
+      <% end %>
+    </div>
+    <div class="col p-4 bg-white">
+      <h1>Add your review</h1>
+      <%= simple_form_for [@list, @review] do |f| %>
+        <%= f.input :comment %>
+        <%= f.input :rating %>
+        <%= f.submit "Create review", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
   
 </div>
