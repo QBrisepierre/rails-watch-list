@@ -1,6 +1,6 @@
 <div class="position-relative">
   <img class="w-100 object-fit-cover" style="height: 400px" src="https://picsum.photos/1920/400" alt="">
-  <h3><span class="position-absolute top-0 end-0 rounded translate-middle badge bg-warning mt-5 negative-margin"><%= @bookmarks.count %> Movies</span></h3>
+  <h3><span class="position-absolute top-0 end-0 rounded translate-middle badge bg-warning mt-5 negative-margin"><%= @list.bookmarks.count %> Movies</span></h3>
 </div>
 <div class="container mt-3">
   
@@ -10,15 +10,16 @@
   </div>
 
   <div class="row row-cols-2">
-    <% @bookmarks.each do |bookmark| %>
+    <% @list.movies.each do |movie| %>
+    <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
       <div class="col">
         <div class="card mb-3">
-          <%= image_tag bookmark.movie.poster_url, class: "card-img-top card-img-movie" %>
+          <%= image_tag movie.poster_url, class: "card-img-top card-img-movie" %>
           <div class="card-body">
-            <h5 class="card-title"><%= bookmark.movie.title %></h5>
-            <p class="card-text"><%= bookmark.comment %></p>
+            <h5 class="card-title"><% movie.title %></h5>
+            <p class="card-text"><% movie.overview %></p>
             <div class="d-flex justify-content-between">
-              <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              <p class="card-text"><small class="text-body-secondary"><%= bookmark.comment %></small></p>
               <%= link_to "delete", list_bookmark_path(@list, bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
             </div>
           </div>
@@ -29,18 +30,27 @@
 
   <div class="row mt-4 mb-5">
     <div class="col">
-      <h2><%= @reviews.count %> Reviews</h2>
-      <% @reviews.each do |review| %>
-        <p><%= review.rating %></p>
-        <p><%= review.comment %></p>
+      <h2><%= @list.reviews.count %> Reviews</h2>
+      <% if @list.reviews.empty? %>
+        <small><em class="text-muted">Be the first one to review this list</em></small>
+      <% end %>
+      <% @list.reviews.each do |review| %>
+        <div>
+          <% review.rating.times do %>
+            <i class="fas fa-star star-yellow"></i>
+          <% end %>
+          <small><em class="text-muted"><%= distance_of_time_in_words_to_now(review.created_at) %> ago</em></small>
+          <p class="mb-0"><%= review.comment %></p>
+        </div>
+        <hr>
       <% end %>
     </div>
-    <div class="col p-4 bg-white">
+    <div class="col p-4 bg-white" id="review">
       <h1>Add your review</h1>
       <%= simple_form_for [@list, @review] do |f| %>
-        <%= f.input :comment %>
-        <%= f.input :rating %>
-        <%= f.submit "Create review", class: "btn btn-primary" %>
+        <%= f.input :comment, placeholder: "Add your review here..." %>
+        <%= f.input :rating, as: :select, collection: (1..5), required: true, label: false, input_html: { data: { controller: "star-rating" } } %>
+        <%= f.submit class: "btn btn-flat mt-2" %>
       <% end %>
     </div>
   </div>

@@ -6,9 +6,8 @@ class ListsController < ApplicationController
   end
 
   def show
-    @bookmarks = @list.bookmarks
-    @reviews = @list.reviews
-    @review = Review.new
+    @bookmarks = Bookmark.new
+    @review = Review.new(list: @list)
   end
 
   def new
